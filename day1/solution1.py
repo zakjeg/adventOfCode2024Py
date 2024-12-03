@@ -1,7 +1,5 @@
 import numpy as np
 import os
-print(os.getcwd())
-
 
 with open("day1\input.txt", "r") as file: 
     data=[line.split() for line in file]
