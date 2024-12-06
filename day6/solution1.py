@@ -1,3 +1,5 @@
+import copy
+
 def findGuard(arr):
     for i in range (len(arr)):
         for n in range (len(arr[0])):
@@ -6,29 +8,32 @@ def findGuard(arr):
                 return cords
             
 matrix=[]
-
+cords = ()
 with open("day6/input.txt", "r") as file:
-    for line in file:
+    for k, line in enumerate(file):
         ent=[]
-        for i in line:
+        for j, i in enumerate(line):
             if i==".":
                 ent.append(0)
             elif i=="#":
                 ent.append(7)
             elif i=="^":
                 ent.append(1)
+                cords = list((k,j))
         matrix.append(ent)
 
-cords = findGuard(matrix)
+# cords = findGuard(matrix)
 
-cords = findGuard(matrix)
+
+# cords = findGuard(matrix)
 visited_positions = set()
 smer = 1  
 
-smer=1
+# smer=1
 print(cords)
 print((len(matrix)), " " , (len(matrix[0])))
-while cords[0]<(len(matrix)) and cords[1]<(len(matrix[0])) and cords[0]>0 and cords[1]>0 :
+
+while cords[0]<(len(matrix)) and cords[1]<(len(matrix[0])) and cords[0]>=0 and cords[1]>=0 :
     visited_positions.add(tuple(cords))  
     
     if smer==1:
@@ -67,6 +72,13 @@ while cords[0]<(len(matrix)) and cords[1]<(len(matrix[0])) and cords[0]>0 and co
         else:
             cords[1]-=1
         print("4")
-    print(cords)
+    # print(cords)
+
+mat = copy.deepcopy(matrix)
+for p in visited_positions:
+    mat[p[0]][p[1]] = 8
+
+for row in mat:
+    print(row)
 
 print("Distinct positions visited:", len(visited_positions))
